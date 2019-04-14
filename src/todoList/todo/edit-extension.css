@@ -1,0 +1,45 @@
+.status-editor-container,
+.dueDate-editor-container,
+.title-editor-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-extension{
+  margin-left: 4%;
+}
+.status-editor-container .circles{
+  display: flex;
+  flex-direction: row;
+}
+
+.green-circle,
+.red-circle,
+.blue-circle,
+.yellow-circle,
+.purple-circle,
+.brown-circle{
+
+  width: 50px;
+  border-radius: 50px;
+  height: 50px;
+  margin:5px;
+}
+.green-circle{
+  background-color: green;
+}
+.red-circle{
+  background-color: red;
+}
+.blue-circle{
+  background-color: blue;
+}
+.yellow-circle{
+  background-color: yellow;
+}
+.purple-circle{
+  background-color: purple ;
+}
+.brown-circle{
+  background-color: brown;
+}

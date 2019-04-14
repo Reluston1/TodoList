@@ -1,0 +1,68 @@
+.nodefalse {
+  display: flex;
+  flex-direction: column;
+}
+
+.nodefalse .todo {
+  display: flex;
+  flex-direction: row;
+}
+
+
+.nodefalse .todo:hover .edit-button,
+.nodefalse .todo:hover .remove-button {
+  display: initial;
+}
+.nodefalse .todo:hover .status-icon{
+  display: none;
+}
+.nodefalse .todo .todo-title {
+  text-align: center;
+  flex: 0.5;
+  background-color: lightgray;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  border-radius: 100px;
+  margin: 10px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+
+.nodefalse .todo .status-icon,
+.nodefalse .todo .status-label,
+.nodefalse .todo .remove-button,
+.nodefalse .todo  .edit-button{
+  flex: 0.1;
+  width: 50px;
+  height: 50px;
+  border-style: solid;
+  cursor: pointer;
+  float: right;
+  border-width: 1px;
+  border-radius: 100px;
+  visibility: visible;
+  margin: 10px;
+  margin-left: 10px;
+  padding: 10px;
+}
+
+.nodefalse .todo .remove-button {
+  background-color: lightsalmon;
+  text-align: center;
+  display: none;
+  border-color: lightsalmon;
+}
+.nodefalse .todo .edit-button {
+  flex: 0.1;
+  background-color: lightblue;
+  border-color: lightblue;
+  display: none; 
+  text-align: center
+}
+
+.nodetrue{
+  display: none;
+  visibility: hidden
+}
