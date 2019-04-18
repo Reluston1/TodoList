@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
 import { TodoList } from './todoList'
-import {TodoListDataStructure} from './dataStuctures/todos'
 import './App.css';
 
 
-const todoAppStruct = new TodoListDataStructure()
 
-export const App = _ => {
+
+export const App = (todoAppStruct) => {
   const [reRender, reRenderSet] = useState(0)
 
   function addTodo(title){
