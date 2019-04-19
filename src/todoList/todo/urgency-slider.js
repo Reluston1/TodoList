@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import Slider from 'react-input-slider';
 
-export const UrgencySlider = (todoUpdater)=>{
+export const UrgencySlider = ({todoUpdater})=>{
   const [sliderPosition, setSliderPosition] = useState(0)
   let styles = {
     lowSlider:{
@@ -9,7 +9,7 @@ export const UrgencySlider = (todoUpdater)=>{
         backgroundColor: 'green'
       },
       active: {
-        backgroundColor: 'blue'
+        backgroundColor: 'green'
       },
       thumb: {
         width: 50,
@@ -21,7 +21,7 @@ export const UrgencySlider = (todoUpdater)=>{
         backgroundColor: 'yellow'
       },
       active: {
-        backgroundColor: 'blue'
+        backgroundColor: 'yellow'
       },
       thumb: {
         width: 50,
@@ -30,11 +30,11 @@ export const UrgencySlider = (todoUpdater)=>{
     },
     highSlider: {
       track: {
-        backgroundColor: 'blue'
+        backgroundColor: 'red'
       },
       active: {
         backgroundColor: 'red'
-      },
+            },
       thumb: {
         width: 50,
         height: 50
@@ -44,15 +44,15 @@ export const UrgencySlider = (todoUpdater)=>{
   return(
     <div>
       <div className="urgency-status">
+        {/* it doesnt re render if im holding it. */}
         <Slider
           styles={sliderPosition <= 33 ? styles.lowSlider : sliderPosition <= 66 ? styles.medSlider : styles.highSlider }
           axis="x"
-          x={50}
-          onChange={({ x }) => { 
-            debugger
-            setSliderPosition(x)
-            todoUpdater({urgency: x <= 33 ? "LOW" : x <= 66 ? "MED" : "HIGH"})
-            }}
+          x={sliderPosition}
+          onChange={({ x }) => setSliderPosition(x)}
+          onDragEnd={()=>{
+            debugger;
+            todoUpdater({urgency: sliderPosition <= 33 ? "LOW" : sliderPosition <= 66 ? "MED" : "HIGH"})}}
         />
       </div>
       <label style={{ textAlign: 'center' }}>{sliderPosition <= 33 ? "LOW" : sliderPosition <= 66 ? "MED" : "HIGH"  } urgency</label>

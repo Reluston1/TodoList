@@ -3,7 +3,6 @@ import { Input, InputGroup, InputGroupAddon } from 'reactstrap'
 
 // input is its own component to reRender itself
 export const AddTodoInput = ({actions}) =>{
-  debugger
   let [ inputValue, setInputValue ] = useState('')
 
   return (

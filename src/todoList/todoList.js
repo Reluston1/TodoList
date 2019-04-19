@@ -23,8 +23,6 @@ export const TodoList = () => {
     TodoAppStruct.goOutside()
     reRenderSet(reRender + 1)
   }
-  debugger
-
   let actions = {
     addTodo: title => addTodo(title),
     goInside: id => goInside(id),

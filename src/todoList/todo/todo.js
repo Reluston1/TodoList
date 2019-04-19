@@ -13,8 +13,7 @@ export const Todo = ({ todo, TodoAppStruct, actions }) => {
   }
   const todoUpdater = ({ completed, title, dueDate, priority, infoModal, color, urgency, x, y }) => updateTodo({ id, completed, title, dueDate, priority, infoModal, color, urgency, x, y })
 
-  
-debugger;
+  debugger;
   return (
     <div className={`node${completed}`} >
       <Draggable 
