@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
 import { Button, Input, InputGroup } from 'reactstrap'
 import './edit-extension.css'
-import {TitleEditor} from './titleEditor'
+import {TitleDueDateEditor} from './title-dueDate-editor'
 import {UrgencySlider} from './urgency-slider'
 
 export const EditExtension = ({ todo, todoUpdater}) => {
-  const { infoModal, title } = todo
+  const { infoModal, title,dueDate } = todo
   const [title2, setTitle] = useState("");
   return (
     <div>
@@ -13,7 +13,7 @@ export const EditExtension = ({ todo, todoUpdater}) => {
         infoModal && (
           <div className='edit-extension'>
             <InputGroup className='input-group'>
-              <TitleEditor setTitle={_=>{setTitle(_)}} savedTitle={title}/>
+              <TitleDueDateEditor setTitle={_=>{setTitle(_)}} savedDueDate={dueDate} savedTitle={title}/>
               <div className="status-editor-container">
                 <div className="circles">
                   <div className="red-circle" onClick={_ => todoUpdater({ color: 'red' })}/>

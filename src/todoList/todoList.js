@@ -2,9 +2,8 @@ import React, { useState } from 'react'
 import { Todo } from './todo'
 import './todoList.css'
 import { TodoListDataStructure } from '../dataStuctures/todos'
-import { AddTodoInput } from './addTodoInput'
-import backIcon from './back.png'
-import {BreadCrumbs} from './breadCrumbs'
+import { AddTodoInput } from './addTodoInput' 
+import {BreadCrumbs} from './breadcrumbs'
 
 const TodoAppStruct = new TodoListDataStructure()
 

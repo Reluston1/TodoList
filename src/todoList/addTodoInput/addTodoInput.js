@@ -1,10 +1,9 @@
 import React, {useState} from 'react'
 import { Input, InputGroup, InputGroupAddon } from 'reactstrap'
-
 // input is its own component to reRender itself
 export const AddTodoInput = ({actions, TodoAppStruct}) =>{
   let [ inputValue, setInputValue ] = useState('')
-
+  
   console.log(TodoAppStruct.directoryNamesArray())
   return (
     <div>

@@ -1,0 +1,9 @@
+.title-editor,
+.due-date-editor{
+  display: flex;
+  flex-direction: row;
+}
+.title-due-date-editor-container{
+  display: flex;
+  flex-direction: column;
+}

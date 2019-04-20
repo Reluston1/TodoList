@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import './todo.css'
 import Draggable from 'react-draggable';
-import { EditExtension } from './edit-extension';
+import { EditExtension } from './edit-extension/edit-extension';
 
 export const Todo = ({ todo, TodoAppStruct, actions }) => {
   const { title, id, dueDate, color, completed,urgency } = todo
