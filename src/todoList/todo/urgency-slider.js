@@ -44,16 +44,14 @@ export const UrgencySlider = ({todoUpdater})=>{
   return(
     <div>
       <div className="urgency-status">
-        {/* it doesnt re render if im holding it. */}
         <Slider
           styles={sliderPosition <= 33 ? styles.lowSlider : sliderPosition <= 66 ? styles.medSlider : styles.highSlider }
           axis="x"
           x={sliderPosition}
-          onChange={({ x }) => setSliderPosition(x)}
-          onDragEnd={()=>{
-            debugger;
-            todoUpdater({urgency: sliderPosition <= 33 ? "LOW" : sliderPosition <= 66 ? "MED" : "HIGH"})}}
+          onChange={ ( { x } ) => { setSliderPosition(x) } }
+          onMouseUp={ ()=>{ todoUpdater( { urgency: sliderPosition <= 33 ? "LOW" : sliderPosition <= 66 ? "MED" : "HIGH" } ) } }
         />
+        {console.log("sliderPosition",sliderPosition)}
       </div>
       <label style={{ textAlign: 'center' }}>{sliderPosition <= 33 ? "LOW" : sliderPosition <= 66 ? "MED" : "HIGH"  } urgency</label>
     </div>

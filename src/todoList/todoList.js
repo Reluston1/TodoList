@@ -4,6 +4,7 @@ import './todoList.css'
 import { TodoListDataStructure } from '../dataStuctures/todos'
 import { AddTodoInput } from './addTodoInput'
 import backIcon from './back.png'
+import {BreadCrumbs} from './breadCrumbs'
 
 const TodoAppStruct = new TodoListDataStructure()
 
@@ -32,19 +33,21 @@ export const TodoList = () => {
     <div className='todo-list'>
       <div className='list-container'>
         {
-          Object.values(TodoAppStruct.focusRef !== null ? TodoAppStruct.focusRef : TodoAppStruct.todos).map(todo => todo ?
-            <Todo todo={todo} TodoAppStruct={TodoAppStruct} actions={actions} /> : null)
+          Object.values(
+            TodoAppStruct.focusRef !== null ?
+             TodoAppStruct.focusRef 
+            : 
+              TodoAppStruct.todos
+          )
+          .map(
+            todo => todo ?
+              <Todo todo={todo} TodoAppStruct={TodoAppStruct} actions={actions} /> 
+            : null
+          )
         }
       </div>
-      <AddTodoInput actions={actions} />
-      {
-        TodoAppStruct.cDL().length > 0 ?
-          <img src={backIcon} onClick={() => { actions.goOutside() }} />
-          : null
-      }
-      <div className='dl-shower'>
-        {TodoAppStruct.directoryNamesToString()}
-      </div>
+      <AddTodoInput TodoAppStruct={TodoAppStruct}  actions={actions} />
+      <BreadCrumbs TodoAppStruct={TodoAppStruct}/>
     </div>
   )
 }

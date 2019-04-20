@@ -12,8 +12,6 @@ export const Todo = ({ todo, TodoAppStruct, actions }) => {
     setReRender(reRender + 1)
   }
   const todoUpdater = ({ completed, title, dueDate, priority, infoModal, color, urgency, x, y }) => updateTodo({ id, completed, title, dueDate, priority, infoModal, color, urgency, x, y })
-
-  debugger;
   return (
     <div className={`node${completed}`} >
       <Draggable 

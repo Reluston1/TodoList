@@ -7,7 +7,6 @@ import {UrgencySlider} from './urgency-slider'
 export const EditExtension = ({ todo, todoUpdater}) => {
   const { infoModal, title } = todo
   const [title2, setTitle] = useState("");
-  debugger;
   return (
     <div>
       {

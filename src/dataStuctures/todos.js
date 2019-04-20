@@ -116,6 +116,18 @@ export class TodoListDataStructure {
       },{titleToString: '', focusRef: this.todos[x]}).titleToString : null
     return y
   }
+  directoryNamesArray(){
+    let x = this.currentDirectoryLevels[0] && this.currentDirectoryLevels[0]
+    let y = this.currentDirectoryLevels[0] !== undefined ? this.currentDirectoryLevels.reduce(({directoryArray, focusRef},value,index,array)=>{
+        directoryArray.push(focusRef.title)
+        if(index !== array.length-1 && array.length > 1) {focusRef = focusRef.todos[array[index+1]]}
+      
+        return {directoryArray, focusRef}
+  
+      },{directoryArray: [], focusRef: this.todos[x]}).directoryArray : null
+    return y
+  }
+
   allColours(){
     
   }
