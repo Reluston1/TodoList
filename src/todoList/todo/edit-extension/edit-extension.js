@@ -7,13 +7,14 @@ import {UrgencySlider} from './urgency-slider'
 export const EditExtension = ({ todo, todoUpdater}) => {
   const { infoModal, title,dueDate } = todo
   const [title2, setTitle] = useState("");
+  const [date, setDate] = useState("");
   return (
     <div>
       {
         infoModal && (
           <div className='edit-extension'>
             <InputGroup className='input-group'>
-              <TitleDueDateEditor setTitle={_=>{setTitle(_)}} savedDueDate={dueDate} savedTitle={title}/>
+              <TitleDueDateEditor setTitle={title=>setTitle(title)} setDate={date=>setDate(date)} savedDueDate={dueDate} savedTitle={title}/>
               <div className="status-editor-container">
                 <div className="circles">
                   <div className="red-circle" onClick={_ => todoUpdater({ color: 'red' })}/>
@@ -31,7 +32,7 @@ export const EditExtension = ({ todo, todoUpdater}) => {
             <Button color="secondary" onClick={_ => todoUpdater({ infoModal: false})}>
               Back
             </Button>
-            <Button color="secondary" onClick={_ => todoUpdater({ infoModal: false, title: title2 })}>
+            <Button color="secondary" onClick={_ => todoUpdater({ infoModal: false, title: title2, dueDate: date })}>
               Save
             </Button>
           </div>

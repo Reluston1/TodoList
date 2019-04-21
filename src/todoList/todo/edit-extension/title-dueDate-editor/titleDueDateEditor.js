@@ -2,7 +2,7 @@ import React from 'react'
 import { Input } from 'reactstrap'
 //own component just for simplicity of edit extension
 
-export const TitleDueDateEditor = ({setTitle, savedTitle,savedDueDate}) =>{
+export const TitleDueDateEditor = ({setTitle,setDate, savedTitle,savedDueDate}) =>{
   return(
     <div className="title-due-date-editor-container">
       <div className="title-editor">
@@ -24,7 +24,7 @@ export const TitleDueDateEditor = ({setTitle, savedTitle,savedDueDate}) =>{
           placeholder={savedDueDate}
           type="text"
           onChange={e => {
-            setTitle(e.target.value)
+            setDate(e.target.value)
           }}
         />
         <label style={{ textAlign: 'center' }}>dueDate</label>

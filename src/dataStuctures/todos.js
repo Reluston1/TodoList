@@ -3,7 +3,7 @@ export class TodoListDataStructure {
     this.todos = {}
     this.focusRef = null;
     this.currentDirectoryLevels = []
-    this.nextTodoId = 0;
+    this.nextTodoId = 1;
   }
   addTodo(title){
     if (!title){ return }
@@ -104,6 +104,30 @@ export class TodoListDataStructure {
   }
   cDL(){
     return this.currentDirectoryLevels
+  }
+  updateFocus(id){
+    debugger;
+    //count how many times to go outside
+    //grab lenght and grab index
+    let length = this.currentDirectoryLevels.length
+    let goOutsideCounter
+    if(id === null){
+      goOutsideCounter = length 
+    }
+    else{
+      let IdIndex = this.currentDirectoryLevels.reduce((acc,value,index,array)=>{
+        if (value === id){
+          acc.indexOfId = index
+        }
+        return acc
+      }
+      ,{indexOfId:null}).indexOfId
+      goOutsideCounter = length - IdIndex - 1;  
+    }
+    while(goOutsideCounter > 0){
+      this.goOutside()
+      goOutsideCounter -= 1
+    }
   }
   directoryNamesToString(){
     let x = this.currentDirectoryLevels[0] && this.currentDirectoryLevels[0]
