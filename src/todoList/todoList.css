@@ -1,26 +1,19 @@
-
-.todo-list{
-  width: 60%;
-  height: 60%;
-  margin-left: 20%;
-}
-.App .input-button-container .input{
-  width: 40%;
-  height: 40%;
-  margin-left: 23%;
-}
-
-.App .input-button-container{
+.todo-list-app{
   display: flex;
-  flex-direction: row
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
 }
 .list-container{
-  height: 900px;
+  flex: 10;
+  background-color: lightblue;
+  overflow: scroll;
 }
-.drag-handler{
-  width: 100px;
-  height: 40px;
-  border-radius: 10px;
-  background-color: aliceblue;
-  text-align: center;
+.input-container{
+  flex:1;
+}
+.breadcrumbs{
+  flex:1;
+  background-color: whitesmoke;
+  border-radius: 5vh;
 }

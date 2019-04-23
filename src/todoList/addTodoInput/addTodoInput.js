@@ -1,18 +1,17 @@
 import React, { useState } from 'react'
-import { Input, InputGroup, InputGroupAddon } from 'reactstrap'
+import './addTodoInput.css'
 
 export const AddTodoInput = ({ actions, TodoAppStruct }) => {
 
   let [inputValue, setInputValue] = useState('')
 
   return (
-    <div>
-      <InputGroup className='input-group'>
-        <Input
+    <div className='add-todo-container'>
+        <input
           id='message'
           className='input'
           value={inputValue}
-          placeholder={`what is there todo in ${TodoAppStruct.directoryNamesArray() ? TodoAppStruct.directoryNamesArray()[TodoAppStruct.directoryNamesArray().length - 1] : 'Life'}`}
+          placeholder={` What is there todo in ${TodoAppStruct.directoryNamesArray() ? TodoAppStruct.directoryNamesArray()[TodoAppStruct.directoryNamesArray().length - 1] : 'Life'}?`}
           onChange={e => setInputValue(e.target.value)}
           onKeyPress={e => {
             if (e.key === 'Enter') {
@@ -21,13 +20,12 @@ export const AddTodoInput = ({ actions, TodoAppStruct }) => {
             }
           }}
         />
-        <InputGroupAddon addonType="append" onClick={_ => {
+        <div addonType="append" className='submit' onClick={_ => {
           actions.addTodo(inputValue)
           setInputValue('')
         }}>
-          add Todo
-        </InputGroupAddon>
-      </InputGroup>
+          Add Todo
+        </div>
     </div>
   )
 }

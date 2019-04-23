@@ -4,6 +4,9 @@ import './edit-extension.css'
 import {TitleDueDateEditor} from './title-dueDate-editor'
 import {UrgencySlider} from './urgency-slider'
 
+//back button shouldn't save colours.
+//scrolling problem that hides input.
+
 export const EditExtension = ({ todo, todoUpdater}) => {
   const { infoModal, title,dueDate } = todo
   const [title2, setTitle] = useState("");

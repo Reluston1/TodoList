@@ -2,11 +2,25 @@ import React, { useState } from 'react'
 import './todo.css'
 import Draggable from 'react-draggable';
 import { EditExtension } from './edit-extension';
+//clean up css
+//position  sticky
+//fix your css
+//once you drag the flag that holds boolean shifts up list  should be false
+// once you drag the div holding the todo in the css is still held in the list. 
+//if two todos are on the same row then they still are restricted by the list 
+//if todo goes to high then u lose trac, since if i press done it shifts up off the page
+//when slicked done, then taken out off list div.
+//on click its still one drag behind
+//get rid of react strap people fint them selves 
+// 3 visibility filters for completed all and undeone, and in all completed should be stratched through.
+
+//finsih due dates fueature
 
 export const Todo = ({ todo, TodoAppStruct, actions }) => {
   const { title, id, dueDate, color, completed, urgency } = todo
 
   const [reRender, setReRender] = useState(0)
+
 
   function updateTodo({ id, completed, title, dueDate, priority, infoModal, color, urgency, x, y }) {
     TodoAppStruct.updateTodo({ id, completed, title, dueDate, priority, infoModal, color, urgency, x, y })

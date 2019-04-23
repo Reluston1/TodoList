@@ -105,7 +105,8 @@ export class TodoListDataStructure {
   cDL(){
     return this.currentDirectoryLevels
   }
-  updateFocus(id){
+  //merge go inside go outside into one function. for simpler API.
+  breadcrumbsClickHandler(id){
     debugger;
     //count how many times to go outside
     //grab lenght and grab index
