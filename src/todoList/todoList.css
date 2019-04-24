@@ -6,8 +6,11 @@
 }
 .list-container{
   flex: 10;
-  background-color: lightblue;
+  background-color: #e9ecef;
   overflow: scroll;
+  margin: 0.5vh;
+  border-radius: 0.5vh;
+  border-width: 0ch;
 }
 .input-container{
   flex:1;

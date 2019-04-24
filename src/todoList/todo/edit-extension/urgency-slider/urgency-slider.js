@@ -10,11 +10,12 @@ export const UrgencySlider = ({todoUpdater})=>{
         backgroundColor: 'green'
       },
       active: {
-        backgroundColor: 'green'
+        backgroundColor: 'green',
       },
       thumb: {
         width: 50,
-        height: 50
+        height: 50,
+        backgroundColor: 'lightgrey'
       }
     },
     medSlider: {
@@ -22,11 +23,12 @@ export const UrgencySlider = ({todoUpdater})=>{
         backgroundColor: 'yellow'
       },
       active: {
-        backgroundColor: 'yellow'
+        backgroundColor: 'yellow',
       },
       thumb: {
         width: 50,
-        height: 50
+        height: 50,
+        backgroundColor: 'lightgrey'
       }
     },
     highSlider: {
@@ -34,11 +36,12 @@ export const UrgencySlider = ({todoUpdater})=>{
         backgroundColor: 'red'
       },
       active: {
-        backgroundColor: 'red'
+        backgroundColor: 'red',
             },
       thumb: {
         width: 50,
-        height: 50
+        height: 50,
+        backgroundColor: 'lightgrey'
       }
     },
   }
@@ -50,9 +53,11 @@ export const UrgencySlider = ({todoUpdater})=>{
           axis="x"
           x={sliderPosition}
           onChange={ ( { x } ) => { setSliderPosition(x) } }
-          onMouseUp={ ()=>{ todoUpdater( { urgency: sliderPosition <= 33 ? "LOW" : sliderPosition <= 66 ? "MED" : "HIGH" } ) } }
+          onMouseUp={ ()=>todoUpdater( { urgency: sliderPosition <= 33 ? "LOW" : sliderPosition <= 66 ? "MED" : "HIGH" } ) } 
         />
-        {console.log("sliderPosition",sliderPosition)}
+        <button className="reset-urgency" onClick={()=>todoUpdater({urgency:"reset"})}>
+            reset urgency
+        </button>
       </div>
       <label style={{ textAlign: 'center' }}>{sliderPosition <= 33 ? "LOW" : sliderPosition <= 66 ? "MED" : "HIGH"  } urgency</label>
     </div>

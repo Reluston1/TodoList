@@ -17,7 +17,7 @@ export class TodoListDataStructure {
       infoModal: false,
       id : this.nextTodoId,
       color: 'white',
-      urgency: "LOW",
+      urgency: null,
       x: 0,
       y: 0,
     }
@@ -49,6 +49,9 @@ export class TodoListDataStructure {
     }
     if (urgency) {
       newTodo.urgency = urgency
+    }
+    if (urgency === "reset") {
+      newTodo.urgency = null
     }
     if (priority) {
       newTodo.priority = priority
@@ -107,7 +110,6 @@ export class TodoListDataStructure {
   }
   //merge go inside go outside into one function. for simpler API.
   breadcrumbsClickHandler(id){
-    debugger;
     //count how many times to go outside
     //grab lenght and grab index
     let length = this.currentDirectoryLevels.length

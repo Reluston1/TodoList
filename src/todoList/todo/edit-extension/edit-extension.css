@@ -10,8 +10,9 @@
   width: 1000px;
   height: 200px;
   border-style: solid;
-  border-width: 2vh;
-  border-radius: 2vh;
+  border-width: 1vh;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
   border-color: lightgray;
   background-color: white;
   display: flex;
@@ -27,34 +28,43 @@
   margin-top: 1vh;
   margin-left:16vh;
 }
+.circles:hover{
+  cursor: pointer;
+}
 
 .green-circle,
+.white-circle,
 .red-circle,
 .blue-circle,
 .yellow-circle,
 .purple-circle,
 .brown-circle{
-
   width: 50px;
   border-radius: 50px;
   height: 50px;
   margin:5px;
 }
 .green-circle{
-  background-color: green;
+  background-color: 	limegreen;
+}
+.white-circle{
+  background-color: white;
+  border-color: grey;
+  border-width: 1px;
+  border-style: solid
 }
 .red-circle{
-  background-color: red;
+  background-color: 	tomato;
 }
 .blue-circle{
-  background-color: blue;
+  background-color: lightskyblue;
 }
 .yellow-circle{
-  background-color: yellow;
+  background-color: 	khaki;
 }
 .purple-circle{
-  background-color: purple ;
+  background-color: 	blueviolet ;
 }
 .brown-circle{
-  background-color: brown;
+  background-color: peru;
 }

@@ -1,6 +1,7 @@
 .todo{
   display: flex;
   flex-direction: row;
+  width: max-content;
 }
 .todo-completed-false,
 .todo-completed-true{
@@ -13,20 +14,34 @@
   visibility: visible;
   background-color: black;
 }
+.drag-handler{
+  cursor: grab;
+}
+.drag-handler:active{
+  cursor: grabbing;
+}
 .left-side{
   width: 10vh;
   height: 12.5vh;
-  background-color: lightgray;
 }
 .text{
   overflow-wrap: break-word;
   background-color: white;
   text-align: center;
   padding-top:1.7vh;
-  font-size: 5vh;
+  font-size: 3.em;
+}
+.text:hover{
+  cursor: pointer;
+}
+.date{
+  background-color: lightgray
 }
 .todo-completed-false:hover .menu-extension .menu{
   visibility: visible;
+}
+.menu:hover{
+  cursor: pointer;
 }
 .dateColumn{
   display: flex;
@@ -43,16 +58,13 @@ margin-top: 4.5vh;
 margin-left: 25%;
 visibility: hidden;
 }
-.due-date,
- .due-date{
-  margin-left:30vh;
-}
+
 .circle-color{
- width: 66px;
- height: 66px;
+ width: 6.6vh;
+ height: 6.6vh;
  border-radius: 50%;
  margin-top: 2.5vh;
- margin-left: 1.5vh;
+ margin-left: 1.7vh;
  margin-right: 1vh;
  padding-top: 1.3vh;
  padding-left: 0.3vh;
@@ -63,7 +75,9 @@ display: none;
 .circle-color:hover .doneText{
 display: initial;
 font-size: 2vh;
+cursor: pointer;
 }
+
 
 .todo-completed-false .left-side .circle-color:hover,
 .todo-completed-true .left-side .circle-color:hover{

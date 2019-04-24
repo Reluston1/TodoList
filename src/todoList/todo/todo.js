@@ -41,21 +41,19 @@ export const Todo = ({ todo, TodoAppStruct, actions }) => {
         position={{ x: todo.x, y: todo.y }}
       >
         <div className={`todo-completed-${completed}`}>
-
-
-
+          <strong><div className='drag-handler'>Drag Here</div></strong>
           <div className="todo">
-            <strong className="cursor"><div className='drag-handler'>Drag Here</div></strong>
-            <div className="dateColumn">
-              {dueDate}
-              <div className="sides">
-                <div className="left-side">
-                  <div className="circle-color" onClick={_ => todoUpdater({ completed: true })} style={urgency === "HIGH" ? { backgroundColor: "red" } : urgency === "MED" ? { backgroundColor: "yellow" } : urgency === "LOW" ? { backgroundColor: "green" } : null}>
+            <div className="left-side" style={{ backgroundColor: `${color}` }}>
+                  <div className="circle-color" onClick={_ => todoUpdater({ completed: true })} style={urgency===null ? { backgroundColor: `${color}` }  : urgency === "HIGH" ? { backgroundColor: "red" } : urgency === "MED" ? { backgroundColor: "yellow" } : urgency === "LOW" ? { backgroundColor: "green" } : null}>
                     <p className='doneText'> DONE? </p>
                   </div>
-                </div>
-                <div className="line">
-                </div>
+            </div>
+            <div className="line">
+            </div>
+            <div className="dateColumn" onClick={_ => actions.goInside(id)}>
+              <div className="date">
+                {dueDate}
+              </div>
                 <Resizable
                   defaultSize={{
                     width:320,
@@ -65,20 +63,13 @@ export const Todo = ({ todo, TodoAppStruct, actions }) => {
                 >
                   {title}
                 </Resizable>
-                <div className="menu-extension" onClick={_ => todoUpdater({ infoModal: true })}>
-                  <img src={menuIcon} alt="" className="menu"/>
-                </div>
-              </div>
             </div> 
+            <div className="menu-extension" onClick={_ => todoUpdater({ infoModal: true })}>
+                  <img src={menuIcon} alt="" className="menu"/>
+            </div>
           </div>
-
           <EditExtension todoUpdater={todoUpdater} TodoAppStruct={TodoAppStruct} actions={actions} todo={todo} />
-
-
-
-
-
-          </div>
+        </div>
       </Draggable>
       
   )

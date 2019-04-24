@@ -20,12 +20,13 @@ export const EditExtension = ({ todo, todoUpdater}) => {
               <TitleDueDateEditor setTitle={title=>setTitle(title)} setDate={date=>setDate(date)} savedDueDate={dueDate} savedTitle={title}/>
               <div className="right-side">
                 <div className="circles">
-                  <div className="red-circle" onClick={_ => todoUpdater({ color: 'red' })}/>
-                  <div className="yellow-circle" onClick={_ => todoUpdater({ color: 'yellow' })}/>
-                  <div className="green-circle" onClick={_ => todoUpdater({ color: 'green' })}/>
-                  <div className="blue-circle" onClick={_ => todoUpdater({ color: 'blue' })} />  
-                  <div className="purple-circle" onClick={_ => todoUpdater({ color: 'purple' })} />
-                  <div className="brown-circle" onClick={_ => todoUpdater({ color: 'brown' })} />
+                  <div className="white-circle" onClick={_ => todoUpdater({ color: 'white' })}/>
+                  <div className="red-circle" onClick={_ => todoUpdater({ color: '	tomato' })}/>
+                  <div className="yellow-circle" onClick={_ => todoUpdater({ color: '	khaki' })}/>
+                  <div className="green-circle" onClick={_ => todoUpdater({ color: 'limegreen' })}/>
+                  <div className="blue-circle" onClick={_ => todoUpdater({ color: 'lightskyblue' })} />  
+                  <div className="purple-circle" onClick={_ => todoUpdater({ color: 'blueviolet' })} />
+                  <div className="brown-circle" onClick={_ => todoUpdater({ color: 'peru' })} />
                 </div>
                 <div className="status-editor-container">
                   <UrgencySlider todoUpdater={todoUpdater}/>
