@@ -16,9 +16,9 @@ export const EditExtension = ({ todo, todoUpdater}) => {
       {
         infoModal && (
           <div className='edit-extension'>
-            <InputGroup className='input-group'>
+            <div className="editors">
               <TitleDueDateEditor setTitle={title=>setTitle(title)} setDate={date=>setDate(date)} savedDueDate={dueDate} savedTitle={title}/>
-              <div className="status-editor-container">
+              <div className="right-side">
                 <div className="circles">
                   <div className="red-circle" onClick={_ => todoUpdater({ color: 'red' })}/>
                   <div className="yellow-circle" onClick={_ => todoUpdater({ color: 'yellow' })}/>
@@ -27,11 +27,12 @@ export const EditExtension = ({ todo, todoUpdater}) => {
                   <div className="purple-circle" onClick={_ => todoUpdater({ color: 'purple' })} />
                   <div className="brown-circle" onClick={_ => todoUpdater({ color: 'brown' })} />
                 </div>
-                <label style={{ textAlign: 'center' }}>color</label>
-                <UrgencySlider todoUpdater={todoUpdater}/>
+                <div className="status-editor-container">
+                  <UrgencySlider todoUpdater={todoUpdater}/>
+                  </div>
               </div>
-
-            </InputGroup>
+            </div>
+            
             <Button color="secondary" onClick={_ => todoUpdater({ infoModal: false})}>
               Back
             </Button>

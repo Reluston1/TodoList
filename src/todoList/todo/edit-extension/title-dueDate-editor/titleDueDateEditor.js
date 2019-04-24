@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input } from 'reactstrap'
+import './titleDueDateEditor.css'
 //own component just for simplicity of edit extension
 
 //new Date('03/10/00') make sure valide date and is a duedate in the future.
@@ -8,28 +8,26 @@ export const TitleDueDateEditor = ({setTitle,setDate, savedTitle,savedDueDate}) 
   return(
     <div className="title-due-date-editor-container">
       <div className="title-editor">
-        <Input
+        <input
           id='message'
-          className='input'
+          className='input-title'
           placeholder={savedTitle}
           type="text"
           onChange={e => {
             setTitle(e.target.value)
           }}
         />
-        <label style={{ textAlign: 'center' }}>title</label>
       </div>
       <div className="due-date-editor">
-        <Input
+        <input
           id='message'
-          className='input'
+          className='input-date'
           placeholder='DD/MM/YYYY'
           type="text"
           onChange={e => {
             setDate(e.target.value)
           }}
         />
-        <label style={{ textAlign: 'center' }}>dueDate</label>
       </div>
     </div>
   ) 

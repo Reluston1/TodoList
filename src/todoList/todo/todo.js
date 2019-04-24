@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import './todo.css'
 import Draggable from 'react-draggable';
 import { EditExtension } from './edit-extension';
+import menuIcon from './icon.png'
+import Resizable from 're-resizable'
 //clean up css
 //position  sticky
 //fix your css
@@ -29,7 +31,6 @@ export const Todo = ({ todo, TodoAppStruct, actions }) => {
   const todoUpdater = ({ completed, title, dueDate, priority, infoModal, color, urgency, x, y }) => updateTodo({ id, completed, title, dueDate, priority, infoModal, color, urgency, x, y })
 
   return (
-    <div className={`node${completed}`} >
       <Draggable
         handle="strong"
         onDrag={(e, position) => {
@@ -39,31 +40,75 @@ export const Todo = ({ todo, TodoAppStruct, actions }) => {
         }}
         position={{ x: todo.x, y: todo.y }}
       >
-        <div>
-          <strong className="cursor"><div className='drag-handler'>Drag Here</div></strong>
-          <div className='todo'>
-            {
-              dueDate && dueDate.length > 0 ?
-                <label className='status-label'>{dueDate && dueDate}</label>
-                :
-                <div className='status-icon' style={urgency === "HIGH" ? { backgroundColor: "red" } : urgency === "MED" ? { backgroundColor: "yellow" } : urgency === "LOW" ? { backgroundColor: "green" } : null}></div>
-            }
-            <div className='edit-button'
-              onClick={_ => {
-                todoUpdater({ infoModal: true })
-              }}> edit </div>
-            <div className='todo-title'
-              onClick={_ => {
-                actions.goInside(id)
-              }}> {title} </div>
-            <div className='remove-button' onClick={_ => {
-              todoUpdater({ completed: true })
-            }}> done </div>
-            <div className='status-icon' style={{ backgroundColor: `${color}` }}></div>
+        <div className={`todo-completed-${completed}`}>
+
+
+
+          <div className="todo">
+            <strong className="cursor"><div className='drag-handler'>Drag Here</div></strong>
+            <div className="dateColumn">
+              {dueDate}
+              <div className="sides">
+                <div className="left-side">
+                  <div className="circle-color" onClick={_ => todoUpdater({ completed: true })} style={urgency === "HIGH" ? { backgroundColor: "red" } : urgency === "MED" ? { backgroundColor: "yellow" } : urgency === "LOW" ? { backgroundColor: "green" } : null}>
+                    <p className='doneText'> DONE? </p>
+                  </div>
+                </div>
+                <div className="line">
+                </div>
+                <Resizable
+                  defaultSize={{
+                    width:320,
+                    height:200,
+                  }}
+                  className='text'
+                >
+                  {title}
+                </Resizable>
+                <div className="menu-extension" onClick={_ => todoUpdater({ infoModal: true })}>
+                  <img src={menuIcon} alt="" className="menu"/>
+                </div>
+              </div>
+            </div> 
           </div>
+
           <EditExtension todoUpdater={todoUpdater} TodoAppStruct={TodoAppStruct} actions={actions} todo={todo} />
-        </div>
+
+
+
+
+
+          </div>
       </Draggable>
-    </div>
+      
   )
 }
+
+
+/*
+
+    <div style={{maxWidth: '300px'}} className={`todo-completed-${completed}`}> 
+      <div className='todo'>
+        <strong className="cursor"><div className='drag-handler'>Drag Here</div></strong>
+        {
+          dueDate && dueDate.length > 0 ?
+            <label className='status-label'>{dueDate && dueDate}</label>
+            :
+            <div className='status-icon' style={urgency === "HIGH" ? { backgroundColor: "red" } : urgency === "MED" ? { backgroundColor: "yellow" } : urgency === "LOW" ? { backgroundColor: "green" } : null}></div>
+        }
+        <div className='edit-button'
+          onClick={_ => {
+            todoUpdater({ infoModal: true })
+          }}> edit </div>
+        <div className='todo-title'
+          onClick={_ => {
+            actions.goInside(id)
+          }}> {title} </div>
+        <div className='remove-button' onClick={_ => {
+          todoUpdater({ completed: true })
+        }}> done </div>
+        <div className='status-icon' style={{ backgroundColor: `${color}` }}></div>
+      </div>
+      <EditExtension todoUpdater={todoUpdater} TodoAppStruct={TodoAppStruct} actions={actions} todo={todo} />
+    </div>
+*/

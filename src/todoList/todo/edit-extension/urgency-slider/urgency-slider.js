@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import Slider from 'react-input-slider';
+import './urgency-slider.css'
 
 export const UrgencySlider = ({todoUpdater})=>{
   const [sliderPosition, setSliderPosition] = useState(0)
@@ -42,7 +43,7 @@ export const UrgencySlider = ({todoUpdater})=>{
     },
   }
   return(
-    <div>
+    <div className="urgency-editor">
       <div className="urgency-status">
         <Slider
           styles={sliderPosition <= 33 ? styles.lowSlider : sliderPosition <= 66 ? styles.medSlider : styles.highSlider }

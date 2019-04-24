@@ -1,22 +1,109 @@
-.nodefalse {
+.todo{
+  display: flex;
+  flex-direction: row;
+}
+.todo-completed-false,
+.todo-completed-true{
   display: flex;
   flex-direction: column;
 }
+.todo-completed-false .line{
+  width: 0.25vh;
+  height: 12.5vh;
+  visibility: visible;
+  background-color: black;
+}
+.left-side{
+  width: 10vh;
+  height: 12.5vh;
+  background-color: lightgray;
+}
+.text{
+  overflow-wrap: break-word;
+  background-color: white;
+  text-align: center;
+  padding-top:1.7vh;
+  font-size: 5vh;
+}
+.todo-completed-false:hover .menu-extension .menu{
+  visibility: visible;
+}
+.dateColumn{
+  display: flex;
+  flex-direction: column  ;
+  text-align: center;
+}
+.sides{
+  display: flex;
+  flex-direction: row ;
+}
+.todo-completed-false .menu-extension .menu,
+.todo-completed-true .menu-extension .menu{
+margin-top: 4.5vh;
+margin-left: 25%;
+visibility: hidden;
+}
+.due-date,
+ .due-date{
+  margin-left:30vh;
+}
+.circle-color{
+ width: 66px;
+ height: 66px;
+ border-radius: 50%;
+ margin-top: 2.5vh;
+ margin-left: 1.5vh;
+ margin-right: 1vh;
+ padding-top: 1.3vh;
+ padding-left: 0.3vh;
+}
+.doneText{
+display: none;
+}
+.circle-color:hover .doneText{
+display: initial;
+font-size: 2vh;
+}
 
-.nodefalse .todo {
+.todo-completed-false .left-side .circle-color:hover,
+.todo-completed-true .left-side .circle-color:hover{
+background-color: white
+}
+
+.todo-completed-true{ 
+  display:  none;
+}
+
+
+
+
+
+
+
+
+
+
+/* .todo-completed-false
+.todo-completed-true {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.todo-completed-false .todo {
   display: flex;
   flex-direction: row;
 }
 
 
-.nodefalse .todo:hover .edit-button,
-.nodefalse .todo:hover .remove-button {
+.todo-completed-false .todo:hover .edit-button,
+.todo-completed-false .todo:hover .remove-button {
   display: initial;
 }
-.nodefalse .todo:hover .status-icon{
+.todo-completed-false .todo:hover .status-icon{
   display: none;
 }
-.nodefalse .todo .todo-title {
+.todo-completed-false .todo .todo-title {
   text-align: center;
   flex: 0.5;
   max-width: 300px;
@@ -31,10 +118,10 @@
 }
 
 
-.nodefalse .todo .status-icon,
-.nodefalse .todo .status-label,
-.nodefalse .todo .remove-button,
-.nodefalse .todo  .edit-button{
+.todo-completed-false .todo .status-icon,
+.todo-completed-false .todo .status-label,
+.todo-completed-false .todo .remove-button,
+.todo-completed-false .todo  .edit-button{
   flex: 0.1;
   width: 50px;
   height: 50px;
@@ -49,13 +136,13 @@
   padding: 10px;
 }
 
-.nodefalse .todo .remove-button {
+.todo-completed-false .todo .remove-button {
   background-color: lightsalmon;
   text-align: center;
   display: none;
   border-color: lightsalmon;
 }
-.nodefalse .todo .edit-button {
+.todo-completed-false .todo .edit-button {
   flex: 0.1;
   background-color: lightblue;
   border-color: lightblue;
@@ -66,4 +153,4 @@
 .nodetrue{
   display: none;
   visibility: hidden
-}
+} */

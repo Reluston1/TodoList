@@ -1,9 +1,13 @@
-.title-editor,
-.due-date-editor{
-  display: flex;
-  flex-direction: row;
+
+.input-title,
+.input-date{
+  border-width: 0px;
 }
-.title-due-date-editor-container{
-  display: flex;
-  flex-direction: column;
+.title-editor{
+  margin-top: 1.5vh;
+  margin-left: 4vh;
+}
+.due-date-editor{
+  margin-top: 4vh;
+  margin-left: 4vh;
 }

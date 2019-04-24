@@ -1,5 +1,6 @@
 import React from 'react'
 import {Breadcrumb,BreadcrumbItem} from 'reactstrap'
+import './breadCrumbs.css'
 
 export const BreadCrumbs = ({TodoAppStruct,actions}) => {
 
@@ -17,7 +18,7 @@ export const BreadCrumbs = ({TodoAppStruct,actions}) => {
   }
 
   return(
-      <div classNam='breadcrumbs' >
+      <div className='breadcrumbs'>
           {
             !TodoAppStruct.directoryNamesArray() ? 
               <BreadcrumbItem active tag="span" href="#">Life</BreadcrumbItem>
