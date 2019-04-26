@@ -18,4 +18,14 @@
 .breadcrumbs{
   flex:1;
   background-color: whitesmoke;
+  top: 9000px;
+}
+.bottom-drag-up{
+  max-height: 30%;
+
+}
+.separator{
+  height: 1vh;
+  width: 100%;
+  background-color: darkgray
 }

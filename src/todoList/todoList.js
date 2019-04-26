@@ -4,6 +4,7 @@ import './todoList.css'
 import { TodoListDataStructure } from '../dataStuctures'
 import { AddTodoInput } from './addTodoInput'
 import { BreadCrumbs } from './breadcrumbs'
+import Resizable from 're-resizable'
 
 //user change the size
 //draggable and resizable
@@ -55,17 +56,20 @@ export const TodoList = () => {
           )
           .map(
             todo => todo ?
-              <Todo todo={todo} TodoAppStruct={TodoAppStruct} actions={actions} />
+              <Todo todo={todo} TodoAppStruct={TodoAppStruct} actions={actions}/>
               : null
           )
         }
-      </div>
-      <div className="input-container">
-        <AddTodoInput className='input' TodoAppStruct={TodoAppStruct} actions={actions} />
-      </div>
-      <div className="breadcrumbs">
-        <BreadCrumbs className='breadcrumb' TodoAppStruct={TodoAppStruct} actions={actions} />
-      </div>
+      </div> 
+      <Resizable className='bottom-drag-up'>
+        <div className="separator"/>
+        <div className="input-container">
+          <AddTodoInput className='input' TodoAppStruct={TodoAppStruct} actions={actions} />
+        </div>
+        <div className="breadcrumbs">
+          <BreadCrumbs className='breadcrumb' TodoAppStruct={TodoAppStruct} actions={actions} />
+        </div>
+      </Resizable>
     </div>
   )
 }

@@ -19,47 +19,54 @@ import Resizable from 're-resizable'
 //finsih due dates fueature
 
 export const Todo = ({ todo, TodoAppStruct, actions }) => {
-  const { title, id, dueDate, color, completed, urgency } = todo
+  const { title, id, dueDate, color, completed, urgency,position } = todo
 
   const [reRender, setReRender] = useState(0)
 
 
-  function updateTodo({ id, completed, title, dueDate, priority, infoModal, color, urgency, x, y }) {
-    TodoAppStruct.updateTodo({ id, completed, title, dueDate, priority, infoModal, color, urgency, x, y })
+  function updateTodo({ id, completed, title, dueDate, priority, infoModal, color, urgency, x, y, position }) {
+    TodoAppStruct.updateTodo({ id, completed, title, dueDate, priority, infoModal, color, urgency, x, y, position })
     setReRender(reRender + 1)
   }
-  const todoUpdater = ({ completed, title, dueDate, priority, infoModal, color, urgency, x, y }) => updateTodo({ id, completed, title, dueDate, priority, infoModal, color, urgency, x, y })
-
+  const todoUpdater = ({ completed, title, dueDate, priority, infoModal, color, urgency, x, y, position }) => updateTodo({ id, completed, title, dueDate, priority, infoModal, color, urgency, x, y,position })
+  debugger;
   return (
       <Draggable
         handle="strong"
         onDrag={(e, position) => {
-
           const { x, y } = position;
-          todoUpdater({ x, y })
+          todoUpdater({ x, y, position: 'absolute'})
         }}
         position={{ x: todo.x, y: todo.y }}
       >
-        <div className={`todo-completed-${completed}`}>
+        <div className={`todo-completed-${completed}`} style={{position: position}}>
           <strong><div className='drag-handler'>Drag Here</div></strong>
           <div className="todo">
-            <div className="left-side" style={{ backgroundColor: `${color}` }}>
-                  <div className="circle-color" onClick={_ => todoUpdater({ completed: true })} style={urgency===null ? { backgroundColor: `${color}` }  : urgency === "HIGH" ? { backgroundColor: "red" } : urgency === "MED" ? { backgroundColor: "yellow" } : urgency === "LOW" ? { backgroundColor: "green" } : null}>
-                    <p className='doneText'> DONE? </p>
-                  </div>
-            </div>
-            <div className="line">
-            </div>
+            <Resizable
+              className="left-side"
+              defaultSize={{
+                width: '100px',
+                height: '118px'
+              }}
+               style={{ backgroundColor: `${color}` }}
+            >
+              <div className="circle-color" onClick={_ => todoUpdater({ completed: true })} style={urgency===null ? { backgroundColor: `${color}` }  : urgency === "HIGH" ? { backgroundColor: "red" } : urgency === "MED" ? { backgroundColor: "yellow" } : urgency === "LOW" ? { backgroundColor: "green" } : null}>
+                <div className="done-text"> DONE? </div>
+              </div>   
+              <div className="line"></div>
+            </Resizable> 
+            
+            
             <div className="dateColumn" onClick={_ => actions.goInside(id)}>
               <div className="date">
                 {dueDate}
               </div>
                 <Resizable
-                  defaultSize={{
-                    width:320,
-                    height:200,
-                  }}
                   className='text'
+                  defaultSize={{
+                    width:'320px',
+                    height:'200px',
+                  }}
                 >
                   {title}
                 </Resizable>

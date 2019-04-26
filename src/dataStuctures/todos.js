@@ -20,6 +20,7 @@ export class TodoListDataStructure {
       urgency: null,
       x: 0,
       y: 0,
+      position: 'relative'
     }
     let referenceToNewFocus = this.todos
     if( this.currentDirectoryLevels.length ){
@@ -30,11 +31,14 @@ export class TodoListDataStructure {
     !this.currentDirectoryLevels.length ? this.todos[this.nextTodoId] = newTodo : referenceToNewFocus[this.nextTodoId] = newTodo
     this.nextTodoId += 1;
   }
-  updateTodo({ id, completed, title, dueDate, priority, infoModal, color,urgency,x,y }) {
+  updateTodo({ id, completed, title, dueDate, priority, infoModal, color,urgency,x,y,position }) {
     const newTodo = {}
     if (id) {
       newTodo.id = id
     } 
+    if(position){
+      newTodo.position = position
+    }
     if(x){
       newTodo.x = x
     }

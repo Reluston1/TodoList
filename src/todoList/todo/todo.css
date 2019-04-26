@@ -7,10 +7,11 @@
 .todo-completed-true{
   display: flex;
   flex-direction: column;
+  max-width: max-content;
 }
 .todo-completed-false .line{
-  width: 0.25vh;
-  height: 12.5vh;
+  width: 10;
+  height: 118;
   visibility: visible;
   background-color: black;
 }
@@ -20,10 +21,7 @@
 .drag-handler:active{
   cursor: grabbing;
 }
-.left-side{
-  width: 10vh;
-  height: 12.5vh;
-}
+
 .text{
   overflow-wrap: break-word;
   background-color: white;
@@ -60,28 +58,25 @@ visibility: hidden;
 }
 
 .circle-color{
- width: 6.6vh;
- height: 6.6vh;
- border-radius: 50%;
- margin-top: 2.5vh;
- margin-left: 1.7vh;
- margin-right: 1vh;
- padding-top: 1.3vh;
- padding-left: 0.3vh;
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  margin: 10%;
+  text-align: center;
+  padding-top: 25%
 }
-.doneText{
-display: none;
+.done-text{
+  display: none;
 }
 .circle-color:hover .doneText{
-display: initial;
-font-size: 2vh;
-cursor: pointer;
+  display: inline;
+  cursor: pointer;
 }
 
 
 .todo-completed-false .left-side .circle-color:hover,
 .todo-completed-true .left-side .circle-color:hover{
-background-color: white
+  background-color: white
 }
 
 .todo-completed-true{ 
