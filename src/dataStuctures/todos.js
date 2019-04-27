@@ -28,6 +28,7 @@ export class TodoListDataStructure {
         referenceToNewFocus = referenceToNewFocus[value].todos
       })
     }
+    
     !this.currentDirectoryLevels.length ? this.todos[this.nextTodoId] = newTodo : referenceToNewFocus[this.nextTodoId] = newTodo
     this.nextTodoId += 1;
   }

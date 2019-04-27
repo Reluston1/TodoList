@@ -5,16 +5,26 @@ import { TodoListDataStructure } from '../dataStuctures'
 import { AddTodoInput } from './addTodoInput'
 import { BreadCrumbs } from './breadcrumbs'
 import Resizable from 're-resizable'
+import firebase from 'firebase/app';
+import {AuthModal} from './authModal/authModal'
 
 //user change the size
 //draggable and resizable
 const TodoAppStruct = new TodoListDataStructure()
-
 export const TodoList = () => {
 
+
+  const [currentUser, setCurrentUser] = useState(null)
   const [reRender, reRenderSet] = useState(0)
+  const [ authModalOpen, toggleAuthModal ] = useState(false)
+  
+ 
   //instead of re redner say update history as a little string into an array, for a little bbetter meaning.
   //
+
+  const activateOnAuthStateListener = () => firebase.auth().onAuthStateChanged(auth => {setCurrentUser(auth)}) 
+  
+  activateOnAuthStateListener()
 
   function focusUpdater(id) {
     TodoAppStruct.updateFocus(id)
@@ -46,6 +56,9 @@ export const TodoList = () => {
   }
   return (
     <div className="todo-list-app">
+    <button style={{width:'300px', height: '300px'}} onClick={_=>toggleAuthModal(!authModalOpen)}> sign in </button>
+     <AuthModal isOpen={authModalOpen} close={() => toggleAuthModal(!authModalOpen)}/>
+      <h1 className="helloMsg">Hello,{currentUser && currentUser.email}</h1>
       <div className="list-container">
         {
           Object.values(

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './addTodoInput.css'
+import firebase from 'firebase'
 
 export const AddTodoInput = ({ actions, TodoAppStruct }) => {
 
@@ -21,8 +22,10 @@ export const AddTodoInput = ({ actions, TodoAppStruct }) => {
           }}
         />
         <div addonType="append" className='submit' onClick={_ => {
-          actions.addTodo(inputValue)
-          setInputValue('')
+          {firebase.database().ref('todos/').push({title: inputValue})}
+            // id's that get generated have time stamps
+          // actions.addTodo(inputValue)
+          // setInputValue('')
         }}>
           Add Todo
         </div>
