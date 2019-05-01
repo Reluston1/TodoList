@@ -19,25 +19,27 @@ import Resizable from 're-resizable'
 //finsih due dates fueature
 
 export const Todo = ({ todo, TodoAppStruct, actions }) => {
-  const { title, id, dueDate, color, completed, urgency,position } = todo
+  const { title,id, dueDate, color, completed, urgency,position } = todo
+
 
   const [reRender, setReRender] = useState(0)
 
 
-  function updateTodo({ id, completed, title, dueDate, priority, infoModal, color, urgency, x, y, position }) {
-    TodoAppStruct.updateTodo({ id, completed, title, dueDate, priority, infoModal, color, urgency, x, y, position })
+  function updateTodo({ completed, title, dueDate, priority, infoModal, color, urgency, position }) {
+    debugger;
+    TodoAppStruct.updateTodo({ id, completed, title, dueDate, priority, infoModal, color, urgency, position })
     setReRender(reRender + 1)
   }
-  const todoUpdater = ({ completed, title, dueDate, priority, infoModal, color, urgency, x, y, position }) => updateTodo({ id, completed, title, dueDate, priority, infoModal, color, urgency, x, y,position })
-  debugger;
+  const todoUpdater = ({ completed, title, dueDate, priority, infoModal, color, urgency, position }) => updateTodo({ completed, title, dueDate, priority, infoModal, color, urgency, position })
   return (
       <Draggable
         handle="strong"
-        onDrag={(e, position) => {
-          const { x, y } = position;
-          todoUpdater({ x, y, position: 'absolute'})
+        onStop={(e, location) => {
+          const { x, y } = location;
+          debugger;
+          todoUpdater({position: { x, y, relative:false }})
         }}
-        position={{ x: todo.x, y: todo.y }}
+        position={{ x: todo.position.x, y: todo.position.y }}
       >
         <div className={`todo-completed-${completed}`} style={{position: position}}>
           <strong><div className='drag-handler'>Drag Here</div></strong>
@@ -81,32 +83,3 @@ export const Todo = ({ todo, TodoAppStruct, actions }) => {
       
   )
 }
-
-
-/*
-
-    <div style={{maxWidth: '300px'}} className={`todo-completed-${completed}`}> 
-      <div className='todo'>
-        <strong className="cursor"><div className='drag-handler'>Drag Here</div></strong>
-        {
-          dueDate && dueDate.length > 0 ?
-            <label className='status-label'>{dueDate && dueDate}</label>
-            :
-            <div className='status-icon' style={urgency === "HIGH" ? { backgroundColor: "red" } : urgency === "MED" ? { backgroundColor: "yellow" } : urgency === "LOW" ? { backgroundColor: "green" } : null}></div>
-        }
-        <div className='edit-button'
-          onClick={_ => {
-            todoUpdater({ infoModal: true })
-          }}> edit </div>
-        <div className='todo-title'
-          onClick={_ => {
-            actions.goInside(id)
-          }}> {title} </div>
-        <div className='remove-button' onClick={_ => {
-          todoUpdater({ completed: true })
-        }}> done </div>
-        <div className='status-icon' style={{ backgroundColor: `${color}` }}></div>
-      </div>
-      <EditExtension todoUpdater={todoUpdater} TodoAppStruct={TodoAppStruct} actions={actions} todo={todo} />
-    </div>
-*/

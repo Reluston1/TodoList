@@ -6,6 +6,13 @@ export const AddTodoInput = ({ actions, TodoAppStruct }) => {
 
   let [inputValue, setInputValue] = useState('')
 
+  function addTodo(){
+    actions.addTodo(inputValue)
+    setInputValue('')
+  }
+
+  window.f = firebase
+
   return (
     <div className='add-todo-container'>
         <input
@@ -21,12 +28,7 @@ export const AddTodoInput = ({ actions, TodoAppStruct }) => {
             }
           }}
         />
-        <div addonType="append" className='submit' onClick={_ => {
-          {firebase.database().ref('todos/').push({title: inputValue})}
-            // id's that get generated have time stamps
-          // actions.addTodo(inputValue)
-          // setInputValue('')
-        }}>
+        <div addonType="append" className='submit' onClick={_ => addTodo()}>
           Add Todo
         </div>
     </div>

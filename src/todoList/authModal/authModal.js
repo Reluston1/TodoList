@@ -1,12 +1,14 @@
 import React, {useState} from 'react'
 import firebase from 'firebase'
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap'
+import { setDisplayName } from 'recompose';
 
 
 export const AuthModal = ({ isOpen /* Boolean */, close /* () => {} */}) => {
 
   const [passwordInput, setPassword] = useState("")
   const [emailInput, setEmail] = useState("")
+  const [usernameInput, setUsername] = useState("")
 
   function signIn({email,password}){
     try{
@@ -19,11 +21,14 @@ export const AuthModal = ({ isOpen /* Boolean */, close /* () => {} */}) => {
       // ...
     }
   }
-  function create({email,password}){
+  function create({email,password, username}){
     try{
       firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(
+          element=> {element.user.updateProfile({displayName: username})}
+        )
     }
-   catch(error) {
+    catch(error) {
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
@@ -36,6 +41,7 @@ export const AuthModal = ({ isOpen /* Boolean */, close /* () => {} */}) => {
       <Modal isOpen={isOpen} toggle={close} className='sign-in-modal'>
         <ModalHeader>Modal title</ModalHeader>
         <ModalBody>
+          <input type="text" className='input' onChange={e=>{setUsername(e.target.value)}} placeholder='username'></input>
           <input type="text" className='input' onChange={e=>{setEmail(e.target.value)}} placeholder='email'/>
           <input type="text" className='input' onChange={e=>{setPassword(e.target.value)}} placeholder='password'/>        </ModalBody>
         <ModalFooter>
@@ -49,7 +55,7 @@ export const AuthModal = ({ isOpen /* Boolean */, close /* () => {} */}) => {
           </Button>{' '}
           <Button color="primary" onClick={
             _=>{
-              create({email:emailInput, password:passwordInput})
+              create({email:emailInput, password:passwordInput, username: usernameInput})
               close()
             }
           }>

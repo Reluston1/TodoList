@@ -10,81 +10,144 @@ import {AuthModal} from './authModal/authModal'
 
 //user change the size
 //draggable and resizable
-const TodoAppStruct = new TodoListDataStructure()
-export const TodoList = () => {
-
-
-  const [currentUser, setCurrentUser] = useState(null)
-  const [reRender, reRenderSet] = useState(0)
-  const [ authModalOpen, toggleAuthModal ] = useState(false)
+let TodoAppStruct = new TodoListDataStructure()
+export class TodoList extends React.PureComponent {
+  state = {
+    currentUser: null,
+    reRender: 0,
+    authModalOpen: false,
+    arrayOfTodos: null
+  }
+  user = this.props.user
+  componentDidMount(){
+      //focus ref just for setting the listner
+      firebase.database().ref(`users/${this.user.uid}/todos/`).on('value', _=>{
+        //listener is triggered every time i add todo or update todo
+        //rebuild array of focus todos
+        TodoAppStruct.focusReferencePromise().then(focusRef=>{
+          //find focus
+          firebase.database().ref(focusRef).once('value', dataSnapshot=>{
+            //build focus todos
+            const todos = dataSnapshot.val()
+            debugger
+            if(todos){
+              let reactTodos = 
+                Object.keys(todos)
+                .map(
+                  todoId  => (
+                    <Todo
+                      style={{
+                        x: todos[todoId].position.x,
+                        y: todos[todoId].position.y,
+                        position: todos[todoId].position.relative ? 'relative' : 'absolute'  
+                      }} 
+                      todo={todos[todoId]}
+                      TodoAppStruct={TodoAppStruct}
+                      actions={this.actions}
+                    />
+                  )
+                )
+              this.setState({arrayOfTodos: reactTodos})
+            }
+          })
+        })
+      })
+      firebase.database().ref(`users/${this.user.uid}/currentDirectoryLevels`).on('value', _=>{
+        TodoAppStruct.focusReferencePromise().then(focusRef=>{
+          firebase.database().ref(focusRef).once('value').then(
+            (snapshot)=>{
+              const todos = snapshot.val()
+              debugger
+              if(todos){
+                let reactTodos = 
+                  Object.keys(todos)
+                  .map(
+                    todoId  => (
+                      <Todo
+                        style={{
+                          x: todos[todoId].position.x,
+                          y: todos[todoId].position.y,
+                          position: todos[todoId].position.relative ? 'relative' : 'absolute'  
+                        }} 
+                        todo={todos[todoId]}
+                        TodoAppStruct={TodoAppStruct}
+                        actions={this.actions}
+                      />
+                    )
+                  )
+                this.setState({arrayOfTodos: reactTodos})
+              }
+              else{
+                this.setState({arrayOfTodos: null})
+              }
+            }
+          )
+        })
+      }
+    )
+  }
   
  
-  //instead of re redner say update history as a little string into an array, for a little bbetter meaning.
-  //
+  reRender(){
+    this.setState({reRender:  this.state.reRender + 1})
+  }
 
-  const activateOnAuthStateListener = () => firebase.auth().onAuthStateChanged(auth => {setCurrentUser(auth)}) 
-  
-  activateOnAuthStateListener()
-
-  function focusUpdater(id) {
+  focusUpdater(id) {
     TodoAppStruct.updateFocus(id)
-    reRenderSet(reRender + 1)
+    this.setState({reRender: this.state.reRender + 1})
   }
-  function addTodo(title) {
+  addTodo(title) {
     TodoAppStruct.addTodo(title)
-    reRenderSet(reRender + 1)
   }
-  function goInside(id) {
+  goInside(id) {
     TodoAppStruct.goInside(id)
-    reRenderSet(reRender + 1)
-  }
-  function goOutside() {
-    TodoAppStruct.goOutside()
-    reRenderSet(reRender + 1)
-  }
-  function breadcrumbsClickHandler(id){
-    TodoAppStruct.breadcrumbsClickHandler(id)
-    reRenderSet(reRender + 1)
   }
 
-  let actions = {
-    addTodo: title => addTodo(title),
-    goInside: id => goInside(id),
-    focusUpdater: id => focusUpdater(id),
-    goOutside: _ => goOutside(),
-    breadcrumbsClickHandler: id => breadcrumbsClickHandler(id)
+  goOutside() {
+    TodoAppStruct.goOutside()
+    this.setState({reRender:  this.state.reRender + 1}) 
   }
-  return (
-    <div className="todo-list-app">
-    <button style={{width:'300px', height: '300px'}} onClick={_=>toggleAuthModal(!authModalOpen)}> sign in </button>
-     <AuthModal isOpen={authModalOpen} close={() => toggleAuthModal(!authModalOpen)}/>
-      <h1 className="helloMsg">Hello,{currentUser && currentUser.email}</h1>
-      <div className="list-container">
-        {
-          Object.values(
-            TodoAppStruct.focusRef !== null ?
-              TodoAppStruct.focusRef
-              :
-              TodoAppStruct.todos
-          )
-          .map(
-            todo => todo ?
-              <Todo todo={todo} TodoAppStruct={TodoAppStruct} actions={actions}/>
-              : null
-          )
-        }
-      </div> 
-      <Resizable className='bottom-drag-up'>
-        <div className="separator"/>
-        <div className="input-container">
-          <AddTodoInput className='input' TodoAppStruct={TodoAppStruct} actions={actions} />
-        </div>
-        <div className="breadcrumbs">
-          <BreadCrumbs className='breadcrumb' TodoAppStruct={TodoAppStruct} actions={actions} />
-        </div>
-      </Resizable>
-    </div>
-  )
+
+  breadcrumbsClickHandler(id){
+    TodoAppStruct.breadcrumbsClickHandler(id)
+    this.setState({reRender:  this.state.reRender + 1})
+  }
+
+  actions = {
+    addTodo: title => this.addTodo(title),
+    goInside: id => this.goInside(id),
+    focusUpdater: id => this.focusUpdater(id),
+    goOutside: _ => this.goOutside(),
+    breadcrumbsClickHandler: id => this.breadcrumbsClickHandler(id)
+  }
+  //click todo steps: 
+  /*
+    set up a listener on CDL in db, when changed, grab the appropriate data from that many levels deep in the actual todo
+    on click of a breadcrumb, update CDL in firebase,
+    listener fired, grabing the approprate list of todos from db
+    updating the state of `TodoList` to hold the new data causing a re-render and showing the correct todos
+  */
+
+  render(){
+    debugger;
+    return (
+      <div className="todo-list-app">
+      <button style={{width:'300px', height: '300px'}} onClick={_=>this.setState({authModalOpen: !this.state.authModalOpen})}> sign in </button>
+      <AuthModal isOpen={this.state.authModalOpen} close={() => this.setState({authModalOpen: !this.state.authModalOpen})}/>
+        <h1 className="helloMsg">Hello,{firebase.auth().currentUser && firebase.auth().currentUser.displayName}</h1>
+        <div className="list-container">{this.state.arrayOfTodos}</div> 
+        <Resizable className='bottom-drag-up'>
+          <div className="separator"/>
+          <div className="input-container">
+            <AddTodoInput className='input' TodoAppStruct={TodoAppStruct} actions={this.actions} />
+          </div>
+          <div className="breadcrumbs">
+            <BreadCrumbs className='breadcrumb' TodoAppStruct={TodoAppStruct} actions={this.actions} />
+          </div>
+        </Resizable>
+      </div>
+    )
+  }
 }
 
 

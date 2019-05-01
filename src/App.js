@@ -14,6 +14,44 @@ var config = {
 
 firebase.initializeApp(config);
 
-export const App = _ => <TodoList/>
+
+
+export class App extends React.PureComponent{
+  state={
+    currentUser: null,
+    authStateChanged: false
+  }
+    
+
+  componentDidMount(){
+    firebase.auth().onAuthStateChanged(auth => { 
+        this.setState({
+          currentUser: auth,
+          authStateChanged: true
+        }) 
+      }
+    )
+  }
+    
+  
+  render(){
+    const { authStateChanged, currentUser } = this.state
+    return (
+      <React.Fragment>
+        {
+          !authStateChanged 
+          ? 
+            <div>loading</div>
+          :
+            currentUser ? <TodoList user={currentUser} />
+            :
+            <div>please sign up</div>
+        }
+      </React.Fragment>
+    )
+  }
+}
 
 export default App;
+
+
